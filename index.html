@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.30">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Maik Bieleke, PhD">
 
-<title>SPO-14582: Data Analysis – Data Analysis</title>
+<title>ProPELL Codebook: Survey Data – ProPELL Codebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -40,23 +40,22 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-b6a8276bf55561bdbc268162d41bd1f7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a06763021a52c43c40a351ac8b799b8f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f6d1ebd12c8ec595d4445e29f1e672df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
-  "type": "overlay",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -73,10 +72,9 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -84,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Data Analysis</span>
+    <span class="navbar-title">ProPELL Codebook</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -99,8 +97,37 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./pages/questionnaire.html"> 
-<span class="menu-text">Questionnaires</span></a>
+<span class="menu-text">Surveys</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./pages/fnirs.qmd"> 
+<span class="menu-text">fNIRS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./pages/watch.qmd"> 
+<span class="menu-text">Watches</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="https://osf.io/2pzr8/overview?view_only=2e11d8e9855b43038145db85bfccdacb" target="_blank"> 
+<span class="menu-text">OSF</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-about" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">About</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-about">    
+        <li>
+    <a class="dropdown-item" href="./index.html">
+ <span class="dropdown-text">Study Information</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="mailto:maik.bieleke@uni-konstanz.de">
+ <span class="dropdown-text">Contact</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -109,22 +136,24 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
+  
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">SPO-14582: Data Analysis</h1>
+<h1 class="title">ProPELL Codebook: Survey Data</h1>
+<p class="subtitle lead">Variable documentation for the ProPELL study</p>
 </div>
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -142,24 +171,101 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-
-<div class="no-row-height column-margin column-container"><div class="">
-
-</div></div><section id="overview" class="level3">
-<h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>“SPO-14582: Data Analysis” is a seminar offered in the <a href="https://www.sportwissenschaft.uni-konstanz.de/en/study/master-of-science/" class="external" target="_blank">M.Sc. Sport Science for Health</a> at the University of Konstanz. It provides an introduction to data analysis using the statistical programming software R and the integrated development environment RStudio. The course is designed for students with little or no prior experience in programming and data analysis.</p>
-<p>Overview of the course content:</p>
+<section id="welcome-to-the-propell-codebook" class="level2">
+<h2 class="anchored" data-anchor-id="welcome-to-the-propell-codebook">Welcome to the ProPELL Codebook</h2>
+<p>This codebook provides comprehensive documentation of all variables assessed across the 25 ProPELL surveys. All questionnaires were administered via LimeSurvey to 75 participants over a 21-week study period.</p>
+<section id="quick-links" class="level3">
+<h3 class="anchored" data-anchor-id="quick-links">Quick Links</h3>
+<div class="d-flex" style="display: flex; flex-wrap: wrap; gap: 1em; margin: 2em 0;">
+<a href="pages/questionnaire.html" class="nav-card" style="flex: 1; min-width: 200px;"> <span class="nav-card-icon">📊</span> <strong>Survey Documentation</strong>
+<div style="font-size: 0.9em; color: #666; margin-top: 0.5em;">
+Browse all survey variables and metadata
+</div>
+</a><p><a href="pages/questionnaire.html" class="nav-card" style="flex: 1; min-width: 200px;"></a></p>
+<a href="pages/questionnaire.html#overview" class="nav-card" style="flex: 1; min-width: 200px;"> <span class="nav-card-icon">📈</span> <strong>Completion Overview</strong>
+<div style="font-size: 0.9em; color: #666; margin-top: 0.5em;">
+View participant completion status
+</div>
+</a><p><a href="pages/questionnaire.html#overview" class="nav-card" style="flex: 1; min-width: 200px;"></a></p>
+<a href="https://cloud.uni-konstanz.de/index.php/f/128545600" class="nav-card" style="flex: 1; min-width: 200px;"> <span class="nav-card-icon">📥</span> <strong>Data Download</strong>
+<div style="font-size: 0.9em; color: #666; margin-top: 0.5em;">
+Access datasets on ProPELL Data Hub
+</div>
+</a><p><a href="https://cloud.uni-konstanz.de/index.php/f/128545600" class="nav-card" style="flex: 1; min-width: 200px;"></a></p>
+</div>
+</section>
+<section id="survey-organization" class="level3">
+<h3 class="anchored" data-anchor-id="survey-organization">Survey Organization</h3>
+<p>The 25 ProPELL surveys are organized as follows:</p>
+<p><strong>Screening Survey:</strong> - <strong>s00</strong> – Screening survey (online)</p>
+<p><strong>Study Surveys (Weeks 1-21):</strong> - Surveys collected both <strong>online</strong> (suffix: <code>o</code>) and <strong>on-site in the laboratory</strong> (suffix: <code>l</code>) - Example: s08o = Week 8 online; s12l = Week 12 on-site</p>
+<div class="info-box">
+<p><strong>Note:</strong> All participant IDs in the datasets are anonymized. The mapping between anonymous and pseudonymous IDs is available to authorized PIs only.</p>
+</div>
+</section>
+<section id="variable-naming-convention" class="level3">
+<h3 class="anchored" data-anchor-id="variable-naming-convention">Variable Naming Convention</h3>
+<p>Variables are prefixed to indicate when they were assessed:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Prefix</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>m0</code></td>
+<td>Screening survey</td>
+</tr>
+<tr class="even">
+<td><code>m1</code></td>
+<td>Pre-exercise survey</td>
+</tr>
+<tr class="odd">
+<td><code>m2</code></td>
+<td>Post-exercise survey</td>
+</tr>
+<tr class="even">
+<td><code>m3</code></td>
+<td>Follow-up survey</td>
+</tr>
+<tr class="odd">
+<td><code>w01</code>–<code>w21</code></td>
+<td>Weekly surveys (weeks 1-21)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example:</em> <code>m1_birthyear</code> = participant’s birthyear assessed in pre-exercise survey</p>
+</section>
+<section id="how-to-use-this-codebook" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-use-this-codebook">How to Use This Codebook</h3>
+<ol type="1">
+<li><strong>Browse Survey Documentation</strong> – Click on a survey to view all variables and their metadata</li>
+<li><strong>Variable Details</strong> – Each variable includes:
 <ul>
-<li>Introduction to R and RStudio</li>
-<li>Building blocks of the R language</li>
-<li>Creating and working with objects in R</li>
-<li>General workflow using R projects</li>
-<li>Data merging, reshaping, and aggregation</li>
-<li>Exploring and visualizing data</li>
-<li>Analyzing data and testing hypotheses</li>
+<li>Item text/prompt</li>
+<li>Response scale and possible values</li>
+<li>Descriptive statistics and distribution plots</li>
+<li>Data completeness information</li>
+<li>Source and contact information</li>
+</ul></li>
+<li><strong>Search</strong> – Use the search feature to find specific variables by name or description</li>
+</ol>
+</section>
+<section id="study-information" class="level3">
+<h3 class="anchored" data-anchor-id="study-information">Study Information</h3>
+<ul>
+<li><strong>Study Duration:</strong> 21-week intensive longitudinal study</li>
+<li><strong>Participants:</strong> 75 participants (sport science students)</li>
+<li><strong>Data Collection:</strong> Online and on-site assessments</li>
+<li><strong>Variables:</strong> 800+ variables across 25 surveys</li>
 </ul>
+<hr>
+<p><strong>Questions?</strong> Contact: maik.bieleke@uni-konstanz.de</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

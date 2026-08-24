@@ -1,0 +1,692 @@
+---
+title: "ProPELL Watch Data Codebook"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+author: "ProPELL/MBieleke"
+description: "This document provides comprehensive documentation of all wearable device (Polar Vantage V2) data collected during the 21-week ProPELL study. It is recommended to consult Polar's webpages and white papers for interpretation of the variables."
+reference-location: margin
+bibliography: ref.bib
+csl: apa.csl
+format: 
+  html:
+    embed-resources: true
+    toc: true
+    toc-title: "Data Index"
+    toc-location: left
+    toc-depth: 3
+    toc-expand: 1
+    theme: [cosmo, unikn.scss]
+    number-sections: false
+knitr:
+  opts_chunk:
+    dev: ragg_png
+---
+
+```{r packages}
+#| echo: false
+#| warning: false
+#| message: false
+
+# working with markdown
+library(knitr)
+library(kableExtra)
+
+# working with data
+library(here)
+library(rio)
+library(dplyr)
+library(tidyr)
+library(stringr)
+
+here::i_am("codebook/pages/_watch.qmd")
+
+# plotting
+library(ggplot2)
+library(unikn)
+theme_set(theme_unikn())
+```
+
+```{r data}
+#| warning: false
+#| message: false
+#| echo: false
+
+# import coding information
+cbk_path <- here::here("data/watch/02-meta/ProPELL-Codebook_Watch.xlsx")
+meta_item  <- import(cbk_path, which = "Items")
+meta_label <- import(cbk_path, which = "Labels")
+
+# import path for watch data
+import_path <- here::here("data/watch/01-processed/")
+
+# participant IDs (from admin metadata)
+meta_ptp <- import(here::here("data/meta/admin.xlsx")) |>
+  dplyr::select(id)
+```
+
+```{r functions}
+#| echo: false
+
+# load shared helpers and render functions
+monofam        <- "Arial"
+copyright_note <- paste0("\u00a9 ", format(Sys.Date(), "%Y"), " ProPELL/MBieleke")
+source(here::here("codebook/utils/utils.R"))
+
+```
+
+
+
+
+
+::: breadcrumb-nav
+[**Home**](../index.html) <span class="breadcrumb-separator">/</span> <span class="breadcrumb-current">Watch Data Documentation</span>
+:::
+
+# Introduction
+
+## Data Collection Overview
+
+The ProPELL study collected continuous physiological and activity data using **Polar Vantage V2** sports watches worn by participants throughout the 21-week study period. Data was extracted using the [Polar Accesslink API v3](https://www.polar.com/accesslink-api/#polar-accesslink-api){.external target="_blank"} and synchronized weekly via the Polar Flow platform.
+
+## Watch Data Types
+
+Five types of data were extracted from the Polar watches, resulting in 14 datasets:
+
+| Prefix | Data Type | Datasets | Description |
+|--------|-----------|----------|-------------|
+| `wsl` | **Sleep** | wsl1-3 | Sleep stages, duration, and quality metrics |
+| `wre` | **Recharge** | wre1-3 | Recovery status and autonomic nervous system metrics |
+| `wda` | **Daily Activity** | wda1-3 | Daily activity summaries and step counts |
+| `wex` | **Exercise** | wex1-4 | Individual workout sessions and training data |
+| `whr` | **Heart Rate** | whr1 | Continuous heart rate measurements |
+
+::: info-box
+**Data Availability:** Watch data is available in the [ProPELL Data Hub](https://cloud.uni-konstanz.de/index.php/f/128545600){.external target="_blank"}. All datasets use anonymized participant IDs and can be joined as necessary.
+:::
+
+## Anonymized Participant IDs
+
+Participant identifiers in watch datasets are anonymized and consistent with survey data identifiers. 
+
+**Variable:** `id`
+
+**Type:** Categorical
+
+**Description:** Anonymized participant identifier assigned during data processing. These IDs replace the original pseudonymized codes (e.g., IKTENT20) to ensure full anonymization.
+
+**Values:** Sequential numeric IDs from 1 to 75
+
+The mapping between anonymized and pseudonymized IDs is restricted to authorized principal investigators and available [here](https://cloud.uni-konstanz.de/index.php/f/130413290){.external target="_blank"} (login required).
+
+### Activity and Exercise IDs
+
+Daily activity and exercise datasets include additional identifier variables:
+
+- **`wda*_activity`**: Hash-transformed Polar activity IDs for daily summaries
+- **`wex*_exercise`**: Hash-transformed Polar exercise IDs for workout sessions
+
+These IDs enable merging of related datasets while maintaining participant anonymity.
+
+## Variable Naming Convention
+
+Watch variables follow a consistent naming pattern:
+
+**Format:** `<prefix>_<descriptor>`
+
+- **Prefix** indicates the dataset and data type (wsl, wre, wda, wex, whr)
+- **Descriptor** identifies the specific measurement
+
+*Examples:*
+- `wda1_steps` = active steps from daily activity data
+- `wsl1_duration` = total sleep duration
+- `wex1_calories` = calories burned during exercise session
+- `whr1_hr` = heart rate value (beats per minute)
+
+---
+
+
+
+
+
+
+
+
+# Sleep
+
+This section contains data about participants' sleep. These data are available when the watch was worn during the night and participants slept for at least four hours.
+
+* [wsl1]{.mf} contains general sleep data
+* [wsl2]{.mf} contains sleep stages samples
+* [wsl3]{.mf} contains heart rate samples
+
+
+
+It can be used together with dates or activity and exercise ids to merge the datasets.
+
+
+## [wsl1]{.mf}
+
+```{r wsl1-data}
+#| echo: false
+data <- import(paste0(import_path, "/wsl1.rds"), trust = TRUE)
+```
+
+Dataset [wsl1]{.mf} contains information about participants' night sleep (e.g., total sleep duration). Each observation corresponds to one recorded night of a specific participant. Here's a quick glimpse of the dataset:
+
+```{r wsl1-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+@wsl1-figure shows how many rows (i.e., nights) each ProPELL participant has contributed to the dataset. The numbers vary due to, for instance, differences in the duration of the study (e.g., dropouts) and compliance with the instructions to wear the watch during the night.
+
+```{r wsl1-figure}
+#| echo: false
+#| fig-cap: Number of nights measured for each participant
+#| fig-height: 15
+
+data_plot <- data %>%
+  count(id)
+
+ggplot(data_plot, aes(id, n)) +
+  coord_flip() +
+  geom_bar(stat = "identity", color = "black",
+           fill = usecol(pal_unikn_pref, 1)) +
+  scale_x_discrete(drop = FALSE, limits = rev) +
+  labs(y = "\n# Nights", x = "Anonymized Participant ID\n",  caption = copyright_note) +
+   theme(plot.caption.position = "plot",
+          text = element_text(family = monofam))
+```
+
+The remainder of this section describes all variables in the dataset.
+
+```{r wsl1}
+#| echo: false
+#| output: asis
+
+render_survey("wsl1", data)
+
+```
+
+---
+
+
+
+
+## [wsl2]{.mf}
+
+```{r wsl2-data}
+#| echo: false
+data <- import(paste0(import_path, "/wsl2.rds"))
+data <- import(paste0(import_path, "/wsl2.rds"))
+```
+
+Dataset [wsl2]{.mf} contains samples of the sleep stages assessed during the night. Each observation corresponds to one sleep stage sample in a recorded night of a specific participant. Here's a quick glimpse of the dataset:
+
+```{r wsl2-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset.
+
+```{r wsl2}
+#| echo: false
+#| output: asis
+
+render_survey("wsl2", data)
+
+```
+
+---
+
+
+
+
+
+## [wsl3]{.mf}
+
+```{r wsl3-data}
+#| echo: false
+data <- import(paste0(import_path, "/wsl3.rds"))
+data <- import(paste0(import_path, "/wsl3.rds"))
+```
+
+Dataset [wsl3]{.mf} contains heart rate samples assessed during each night recorded with the watch. Each observation corresponds to one heart rate sample in one night of a specific participant. Here's a quick glimpse of the dataset:
+
+```{r wsl3-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset.
+
+```{r wsl3}
+#| echo: false
+#| output: asis
+
+render_survey("wsl3", data)
+
+```
+
+---
+
+
+
+
+
+# Recharge
+
+This sections contains data about participants’ recharge status. These data are available when the watch was worn during the night.
+
+## [wre1]{.mf}
+
+```{r wre1-data}
+#| echo: false
+data <- import(paste0(import_path, "/wre1.rds"))
+```
+
+Dataset [wre1]{.mf} contains information about nightly recharge (e.g., average heart rate variability). Each observation corresponds to one recorded night of a specific participant. Here's a quick glimpse of the dataset:
+
+```{r wre1-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+@fig-wre1 shows how many rows (i.e., nights) each ProPELL participant has contributed to the dataset. The numbers vary due to, for instance, differences in the duration of the study (e.g., dropouts) and compliance with the instructions to wear the watch during the night.
+
+```{r wre1-figure}
+#| echo: false
+#| fig-cap: Number of nights measured for each participant
+#| fig-height: 15
+
+data_plot <- data %>%
+  count(id)
+
+ggplot(data_plot, aes(id, n)) +
+  coord_flip() +
+  geom_bar(stat = "identity", color = "black",
+           fill = usecol(pal_unikn_pref, 1)) +
+  scale_x_discrete(drop = FALSE, limits = rev) +
+  labs(y = "\n# Rows/Nights", x = "Anonmyized Participant ID\n",  caption = copyright_note) +
+   theme(plot.caption.position = "plot",
+          text = element_text(family = monofam))
+```
+
+The remainder of this section describes all variables in the dataset.
+
+```{r wre1}
+#| echo: false
+#| output: asis
+
+render_survey("wre1", data)
+
+```
+
+---
+
+
+
+
+
+## [wre2]{.mf}
+
+```{r wre2-data}
+#| echo: false
+data <- import(paste0(import_path, "/wre2.rds"))
+```
+
+Dataset [wre2]{.mf} contains samples of the heart rate variability assessed during the night. Each observation corresponds to one heart rate variability sample in one night of a specific participant. Here's a quick glimpse of the dataset:
+
+```{r wre2-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset. 
+
+```{r wre2}
+#| echo: false
+#| output: asis
+
+render_survey("wre2", data)
+
+```
+
+---
+
+
+
+
+
+## [wre3]{.mf}
+
+```{r wre3-data}
+#| echo: false
+data <- import(paste0(import_path, "/wre3.rds"))
+```
+
+Dataset [wre3]{.mf} contains samples of the breathing rates assessed during each night in which the watch was worn. Each observation corresponds to one breathing rate sample in one night of a specific participant. Here's a quick glimpse of the dataset:
+
+```{r wre3-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset. 
+
+```{r wre3}
+#| echo: false
+#| output: asis
+
+render_survey("wre3", data)
+
+```
+
+---
+
+
+
+
+
+# Activity
+
+## [wda1]{.mf}
+
+```{r wda1-data}
+#| echo: false
+data <- import(paste0(import_path, "/wda1.rds"))
+```
+
+Dataset [wda1]{.mf} contains aggregate general information about physical activity for each day on which the Polar watch was worn (e.g., number of active steps). Each observation corresponds to one day of a specific participant. Here's a quick glimpse of the dataset:
+
+```{r wda1-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+@fig-wda1 shows how many rows (i.e., days) each participant in ProPELL has contributed to the dataset. The numbers vary because of differences between participants in the duration of the study and compliance with the instructions to wear the watch during the day.
+
+```{r wda1-figure}
+#| echo: false
+#| fig-cap: Number of nights measured for each participant
+#| fig-height: 15
+
+data_plot <- data %>%
+  count(id)
+
+ggplot(data_plot, aes(id, n)) +
+  coord_flip() +
+  geom_bar(stat = "identity", color = "black",
+           fill = usecol(pal_unikn_pref, 1)) +
+  scale_x_discrete(drop = FALSE, limits = rev) +
+  labs(y = "\n# Rows/Days", x = "Anonymized Participant ID\n",  caption = copyright_note) +
+   theme(plot.caption.position = "plot",
+          text = element_text(family = monofam))
+```
+
+The remainder of this section describes all variables in the dataset. 
+
+```{r wda1}
+#| echo: false
+#| output: asis
+
+render_survey("wda1", data)
+
+```
+
+---
+
+
+
+
+
+## [wda2]{.mf}
+
+```{r wda2-data}
+#| echo: false
+data <- import(paste0(import_path, "/wda2.rds"))
+```
+
+Dataset [wda2]{.mf} contains samples of the active steps assessed during each days on which the watch was worn. Each observation corresponds to one active steps count sample on one day of a specific participant. Here's a quick glimpse of the dataset:
+
+```{r wda2-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset. 
+
+```{r wda2}
+#| echo: false
+#| output: asis
+
+render_survey("wda2", data)
+
+```
+
+---
+
+
+
+
+
+## [wda3]{.mf}
+
+```{r wda3-data}
+#| echo: false
+data <- import(paste0(import_path, "/wda3.rds"))
+```
+
+Dataset [wda3]{.mf} contains samples of the activity stages assessed during each day on which the watch was worn. Each observation corresponds to a one-hour interval for each day. Here's a quick glimpse of the dataset:
+
+```{r wda3-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset. 
+
+```{r wda3}
+#| echo: false
+#| output: asis
+
+render_survey("wda3", data)
+
+```
+
+---
+
+
+
+
+
+
+
+
+
+
+# Exercise
+
+This section contains data about participants' exercises. These data are available when an exercise was recorded with the watch.
+
+* [wex1]{.mf} contains general information about the exercise
+* [wex2]{.mf} contains information about heart rate zones
+* [wex3]{.mf} contains information about heart rates
+* [wex4]{.mf} contains information about R-R intervals
+
+## [wex1]{.mf}
+
+```{r wex1-data}
+#| echo: false
+data <- import(paste0(import_path, "/wex1.rds"))
+```
+
+Dataset [wex1]{.mf} contains information about exercises participants performed (e.g., duration of the exercise). Each observation corresponds to one exercise recorded with the Polar watch. Here's a quick glimpse of the dataset:
+
+```{r wex1-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+@fig-wex1 shows how many rows (i.e., exercises) each participant in ProPELL has contributed to the dataset.
+
+```{r wex1-figure}
+#| echo: false
+#| fig-cap: Number of exercises recorded by each participant
+#| fig-height: 15
+
+data_plot <- data %>%
+  count(id)
+
+ggplot(data_plot, aes(id, n)) +
+  coord_flip() +
+  geom_bar(stat = "identity", color = "black",
+           fill = usecol(pal_unikn_pref, 1)) +
+  scale_x_discrete(drop = FALSE, limits = rev) +
+  labs(y = "\n# Rows/Days", x = "Participant ID\n",  caption = copyright_note) +
+   theme(plot.caption.position = "plot",
+          text = element_text(family = monofam))
+```
+
+The remainder of this section describes all variables in the dataset. 
+
+```{r wex1}
+#| echo: false
+#| output: asis
+
+render_survey("wex1", data)
+
+```
+
+---
+
+
+
+
+
+## [wex2]{.mf}
+
+```{r wex2-data}
+#| echo: false
+data <- import(paste0(import_path, "/wex2.rds"))
+```
+
+Dataset [wex2]{.mf} provides information about how much time participants spent in one of five heart rate zones during an exercise. Each observation corresponds to one heart rate zone for each exercise recorded with the watch. Here's a quick glimpse of the dataset:
+
+```{r wex2-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset.
+
+```{r wex2}
+#| echo: false
+#| output: asis
+
+render_survey("wex2", data)
+
+```
+
+---
+
+
+
+
+
+## [wex3]{.mf}
+
+```{r wex3-data}
+#| echo: false
+data <- import(paste0(import_path, "/wex3.rds"))
+```
+
+Dataset [wex3]{.mf} contains the measured heart rates during exercise. Each observation corresponds to one heart rate measurement for each exercise recorded with the watch. Here's a quick glimpse of the dataset:
+
+```{r wex3-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset.
+
+```{r wex3}
+#| echo: false
+#| output: asis
+
+render_survey("wex3", data)
+
+```
+
+---
+
+
+
+
+
+## [wex4]{.mf}
+
+```{r wex4-data}
+#| echo: false
+data <- import(paste0(import_path, "/wex4.rds"))
+```
+
+Dataset [wex4]{.mf} contains the measured R-R intervals during exercise. Each observation corresponds to one R-R measurement for each exercise recorded with the watch. Here's a quick glimpse of the dataset:
+
+```{r wex4-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset.
+
+```{r wex4}
+#| echo: false
+#| output: asis
+
+render_survey("wex4", data)
+
+```
+
+---
+
+
+
+
+
+
+
+
+
+
+# Heart rate
+
+This section contains the continuous heart rate data. These data are available when the watch is worn. The watch takes regular samples and will start the continuous measurement when the heart rate is elevated or wrist movements are detected. It switches back from continuous to regular tracking when the activity level drops.
+
+* [whr1]{.mf} contains the continuous heart rate data.
+
+## [whr1]{.mf}
+
+```{r whr1-data}
+#| echo: false
+data <- import(paste0(import_path, "/whr1.rds"))
+```
+
+Dataset [whr1]{.mf} comprises `r format(nrow(data), nsmall = 1, big.mark = ",")` observations of `r ncol(data)` variables. Each observations corresponds to one heart rate sample of a participant. Here's a quick glimpse of the dataset: 
+
+```{r whr1-glimpse}
+#| echo: false
+glimpse(data)
+```
+
+The remainder of this section describes all variables in the dataset. 
+
+```{r whr1}
+#| echo: false
+#| output: asis
+
+render_survey("whr1", data)
+
+```
+
+---

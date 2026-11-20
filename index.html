@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Maik Bieleke, PhD">
+<meta name="author" content="Maik Bieleke et al.">
 
-<title>ProPELL Codebook: Survey Data – ProPELL Codebook</title>
+<title>ProPELL Codebook</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -43,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-a06763021a52c43c40a351ac8b799b8f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f6d1ebd12c8ec595d4445e29f1e672df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-fe0619d7c5d13ab894be1150f451a9f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -95,18 +95,41 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link active" href="./index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./pages/questionnaire.html"> 
-<span class="menu-text">Surveys</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-codebooks" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Codebooks</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-codebooks">    
+        <li>
+    <a class="dropdown-item" href="./pages/a1-fitness.html">
+ <span class="dropdown-text">A1 Fitness</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./pages/_fnirs.qmd"> 
-<span class="menu-text">fNIRS</span></a>
+        <li>
+    <a class="dropdown-item" href="./pages/a2-cortisol.html">
+ <span class="dropdown-text">A2 Cortisol</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./pages/_watch.qmd"> 
-<span class="menu-text">Watches</span></a>
+        <li>
+    <a class="dropdown-item" href="./pages/b1-effort.html">
+ <span class="dropdown-text">B1 Effort</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./pages/b2-regulation.html">
+ <span class="dropdown-text">B2 Regulation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pages/b3-ambulatory.html">
+ <span class="dropdown-text">B3 Ambulatory Assessment</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pages/z1-survey.html">
+ <span class="dropdown-text">Z1 Surveys</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./pages/z2-polar.html">
+ <span class="dropdown-text">Z2 Watch Data</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -138,30 +161,51 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
-  
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Navigation</h2>
+   
+  <ul>
+  <li><a href="#codebooks" id="toc-codebooks" class="nav-link active" data-scroll-target="#codebooks">Codebooks</a></li>
+  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study design</a></li>
+  <li><a href="#dataset-names" id="toc-dataset-names" class="nav-link" data-scroll-target="#dataset-names">Dataset names</a></li>
+  <li><a href="#variable-names" id="toc-variable-names" class="nav-link" data-scroll-target="#variable-names">Variable names</a></li>
+  <li><a href="#linking-datasets" id="toc-linking-datasets" class="nav-link" data-scroll-target="#linking-datasets">Linking datasets</a></li>
+  <li><a href="#reading-a-codebook" id="toc-reading-a-codebook" class="nav-link" data-scroll-target="#reading-a-codebook">Reading a codebook</a></li>
+  <li><a href="#data-access" id="toc-data-access" class="nav-link" data-scroll-target="#data-access">Data access</a></li>
+  </ul>
+</nav>
+</nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ProPELL Codebook: Survey Data</h1>
-<p class="subtitle lead">Variable documentation for the ProPELL study</p>
+<h1 class="title">ProPELL Codebook</h1>
+<p class="subtitle lead">Documentation of all processed ProPELL datasets</p>
 </div>
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-right">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Maik Bieleke, PhD </p>
+             <p>Maik Bieleke et al. </p>
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">20 November, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -171,101 +215,225 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-the-propell-codebook" class="level2">
-<h2 class="anchored" data-anchor-id="welcome-to-the-propell-codebook">Welcome to the ProPELL Codebook</h2>
-<p>This codebook provides comprehensive documentation of all variables assessed across the 25 ProPELL surveys. All questionnaires were administered via LimeSurvey to 75 participants over a 21-week study period.</p>
-<section id="quick-links" class="level3">
-<h3 class="anchored" data-anchor-id="quick-links">Quick Links</h3>
-<div class="d-flex" style="display: flex; flex-wrap: wrap; gap: 1em; margin: 2em 0;">
-<a href="pages/questionnaire.html" class="nav-card" style="flex: 1; min-width: 200px;"> <span class="nav-card-icon">📊</span> <strong>Survey Documentation</strong>
-<div style="font-size: 0.9em; color: #666; margin-top: 0.5em;">
-Browse all survey variables and metadata
-</div>
-</a><p><a href="pages/questionnaire.html" class="nav-card" style="flex: 1; min-width: 200px;"></a></p>
-<a href="pages/questionnaire.html#overview" class="nav-card" style="flex: 1; min-width: 200px;"> <span class="nav-card-icon">📈</span> <strong>Completion Overview</strong>
-<div style="font-size: 0.9em; color: #666; margin-top: 0.5em;">
-View participant completion status
-</div>
-</a><p><a href="pages/questionnaire.html#overview" class="nav-card" style="flex: 1; min-width: 200px;"></a></p>
-<a href="https://cloud.uni-konstanz.de/index.php/f/128545600" class="nav-card" style="flex: 1; min-width: 200px;"> <span class="nav-card-icon">📥</span> <strong>Data Download</strong>
-<div style="font-size: 0.9em; color: #666; margin-top: 0.5em;">
-Access datasets on ProPELL Data Hub
-</div>
-</a><p><a href="https://cloud.uni-konstanz.de/index.php/f/128545600" class="nav-card" style="flex: 1; min-width: 200px;"></a></p>
-</div>
-</section>
-<section id="survey-organization" class="level3">
-<h3 class="anchored" data-anchor-id="survey-organization">Survey Organization</h3>
-<p>The 25 ProPELL surveys are organized as follows:</p>
-<p><strong>Screening Survey:</strong> - <strong>s00</strong> – Screening survey (online)</p>
-<p><strong>Study Surveys (Weeks 1-21):</strong> - Surveys collected both <strong>online</strong> (suffix: <code>o</code>) and <strong>on-site in the laboratory</strong> (suffix: <code>l</code>) - Example: s08o = Week 8 online; s12l = Week 12 on-site</p>
-<div class="info-box">
-<p><strong>Note:</strong> All participant IDs in the datasets are anonymized. The mapping between anonymous and pseudonymous IDs is available to authorized PIs only.</p>
-</div>
-</section>
-<section id="variable-naming-convention" class="level3">
-<h3 class="anchored" data-anchor-id="variable-naming-convention">Variable Naming Convention</h3>
-<p>Variables are prefixed to indicate when they were assessed:</p>
+<!-- TODO: check the numbers; add one or two sentences on the aims of ProPELL and the training -->
+<p>ProPELL is a 21-week intensive longitudinal study with 75 participants (sport science students). It combines laboratory tests, MRI, saliva samples, online surveys, and recordings in daily life with activity sensors, smartphones, and watches. This site documents the processed datasets, with one codebook per project. This page explains what all codebooks have in common.</p>
+<section id="codebooks" class="level2">
+<h2 class="anchored" data-anchor-id="codebooks">Codebooks</h2>
+<!-- TODO: add the missing PIs and the collection period of each project -->
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Prefix</th>
-<th>Meaning</th>
+<th>Codebook</th>
+<th>Project code</th>
+<th>Data</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>m0</code></td>
-<td>Screening survey</td>
+<td><a href="./pages/a1-fitness.html">A1 Fitness</a></td>
+<td><code>fit</code></td>
+<td>Physical performance tests in the laboratory</td>
 </tr>
 <tr class="even">
-<td><code>m1</code></td>
-<td>Pre-exercise survey</td>
+<td><a href="./pages/a2-cortisol.html">A2 Cortisol</a></td>
+<td><code>cor</code></td>
+<td>Salivary cortisol after awakening and a morning questionnaire</td>
 </tr>
 <tr class="odd">
-<td><code>m2</code></td>
-<td>Post-exercise survey</td>
+<td><a href="./pages/b1-effort.html">B1 Effort</a></td>
+<td><code>eff</code></td>
+<td>Baseline, choice, and interval tasks on a cycle ergometer, with fNIRS</td>
 </tr>
 <tr class="even">
-<td><code>m3</code></td>
-<td>Follow-up survey</td>
+<td><a href="./pages/b2-regulation.html">B2 Regulation</a></td>
+<td><code>reg</code></td>
+<td>Brain data (MRI) and performance in five tasks</td>
 </tr>
 <tr class="odd">
-<td><code>w01</code>–<code>w21</code></td>
-<td>Weekly surveys (weeks 1-21)</td>
+<td><a href="./pages/b3-ambulatory.html">B3 Ambulatory Assessment</a></td>
+<td><code>amb</code></td>
+<td>Physical activity (movisens Move 3) and smartphone surveys (movisensXS) in daily life</td>
+</tr>
+<tr class="even">
+<td><a href="./pages/z1-survey.html">Z1 Surveys</a></td>
+<td><code>svy</code></td>
+<td>Screening, demographics, trait and state questionnaires</td>
+</tr>
+<tr class="odd">
+<td><a href="./pages/z2-polar.html">Z2 Watch Data</a></td>
+<td><code>pol</code></td>
+<td>Sleep, Nightly Recharge, daily activity, exercise, and heart rate</td>
 </tr>
 </tbody>
 </table>
-<p><em>Example:</em> <code>m1_birthyear</code> = participant’s birthyear assessed in pre-exercise survey</p>
 </section>
-<section id="how-to-use-this-codebook" class="level3">
-<h3 class="anchored" data-anchor-id="how-to-use-this-codebook">How to Use This Codebook</h3>
-<ol type="1">
-<li><strong>Browse Survey Documentation</strong> – Click on a survey to view all variables and their metadata</li>
-<li><strong>Variable Details</strong> – Each variable includes:
-<ul>
-<li>Item text/prompt</li>
-<li>Response scale and possible values</li>
-<li>Descriptive statistics and distribution plots</li>
-<li>Data completeness information</li>
-<li>Source and contact information</li>
-</ul></li>
-<li><strong>Search</strong> – Use the search feature to find specific variables by name or description</li>
-</ol>
+<section id="study-design" class="level2">
+<h2 class="anchored" data-anchor-id="study-design">Study design</h2>
+<!-- TODO: check this description and fill in the study weeks of p1 to p3 -->
+<p>The study started with an online screening, followed by test phases before the training (pre), after the training (post), and at follow-up. Participants also completed weekly surveys. The variable <code>tp</code> gives the test phase or study week and uses the same codes in all codebooks. Not every project measured in every phase.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Meaning</th>
+<th>Study week</th>
+<th>Codebooks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>p0</code></td>
+<td>Screening</td>
+<td>Before the study</td>
+<td>Z1</td>
+</tr>
+<tr class="even">
+<td><code>p1</code></td>
+<td>Pre</td>
+<td>TODO</td>
+<td>A1, A2, B1, B2, B3, Z1</td>
+</tr>
+<tr class="odd">
+<td><code>p2</code></td>
+<td>Post</td>
+<td>TODO</td>
+<td>A1, A2, B1, B2, B3, Z1</td>
+</tr>
+<tr class="even">
+<td><code>p3</code></td>
+<td>Follow-up</td>
+<td>TODO</td>
+<td>A1, A2, B1, B3, Z1</td>
+</tr>
+<tr class="odd">
+<td><code>w02</code> to <code>w21</code></td>
+<td>Weekly survey</td>
+<td>2 to 21</td>
+<td>Z1</td>
+</tr>
+</tbody>
+</table>
+<p>There was no weekly measurement in week 1, so the weekly codes start at <code>w02</code>. The watch data (Z2) have no test phase because they are collected continuously throughout the study (see <a href="#linking-datasets">Linking datasets</a>).</p>
 </section>
-<section id="study-information" class="level3">
-<h3 class="anchored" data-anchor-id="study-information">Study Information</h3>
+<section id="dataset-names" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-names">Dataset names</h2>
+<p>Every dataset name has seven letters: a project code (three letters), a content code (three letters), and a level code (one letter) that says what one row is. For example, <code>corcare</code> stands for cortisol (<code>cor</code>), cortisol awakening response (<code>car</code>), and one row per event (<code>e</code>). The project codes are listed under <a href="#codebooks">Codebooks</a>, the content codes in each codebook. Some projects split the content code into a topic or task and a data type, such as <code>ch</code> (choice task) and <code>p</code> (performance) in <code>effchps</code>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 36%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level code</th>
+<th>One row is</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>p</code></td>
+<td>Participant</td>
+<td><code>svyscrp</code></td>
+</tr>
+<tr class="even">
+<td><code>s</code></td>
+<td>Test phase or study week</td>
+<td><code>fittsts</code></td>
+</tr>
+<tr class="odd">
+<td><code>d</code></td>
+<td>Day or night</td>
+<td><code>ambactd</code></td>
+</tr>
+<tr class="even">
+<td><code>e</code></td>
+<td>Event within a day, such as a sampling point, a prompt, or an exercise session</td>
+<td><code>corcare</code></td>
+</tr>
+<tr class="odd">
+<td><code>h</code></td>
+<td>Hour</td>
+<td><code>polstph</code></td>
+</tr>
+<tr class="even">
+<td><code>m</code></td>
+<td>Minute, or a time step of 1 to 5 minutes</td>
+<td><code>ambactm</code></td>
+</tr>
+<tr class="odd">
+<td><code>t</code></td>
+<td>Trial or block</td>
+<td><code>regespt</code></td>
+</tr>
+<tr class="even">
+<td><code>c</code></td>
+<td>Continuous signal (seconds or finer, or beat to beat)</td>
+<td><code>effchfc</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="variable-names" class="level2">
+<h2 class="anchored" data-anchor-id="variable-names">Variable names</h2>
+<p>Repeated measurements are stored in rows. A variable has the same name in every test phase, and <code>tp</code> says which test phase a row belongs to.</p>
+<p>Questionnaire variables follow the same rules in all projects:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Pattern</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Scale and two-digit number</td>
+<td>Item</td>
+<td><code>bscs01</code>, <code>aff01</code></td>
+</tr>
+<tr class="even">
+<td>Scale</td>
+<td>Scale score</td>
+<td><code>bscs</code></td>
+</tr>
+<tr class="odd">
+<td>Scale and one letter</td>
+<td>Subscale score</td>
+<td><code>proei</code>, <code>affv</code></td>
+</tr>
+<tr class="even">
+<td>Item and <code>d</code></td>
+<td>Free-text detail to that item</td>
+<td><code>consumption01d</code></td>
+</tr>
+</tbody>
+</table>
+<p>All other variables combine building blocks that are explained in each codebook, for example <code>cmjpmax</code> (maximal power in the countermovement jump) in A1.</p>
+</section>
+<section id="linking-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="linking-datasets">Linking datasets</h2>
+<!-- TODO: say where each participant's schedule (dates of the test phases and study weeks) is available, ideally as a dataset -->
+<p>Each participant has the same anonymized ID, <code>id</code>, in every dataset that contains IDs. The test phase <code>tp</code> uses the same codes in all codebooks, so <code>id</code> and <code>tp</code> link datasets across projects. Within a project, datasets of different levels share the variables of their keys, for example the exercise ID <code>ed</code> in the watch data.</p>
+<p>The watch data (Z2) have no test phase. Use <code>date</code> to link them to the study schedule.</p>
+<p>The admission checklist and the demographics (Z1) are not linked to participant IDs for privacy reasons, so they cannot be combined with other datasets.</p>
+</section>
+<section id="reading-a-codebook" class="level2">
+<h2 class="anchored" data-anchor-id="reading-a-codebook">Reading a codebook</h2>
+<p>Each codebook has the same structure:</p>
 <ul>
-<li><strong>Study Duration:</strong> 21-week intensive longitudinal study</li>
-<li><strong>Participants:</strong> 75 participants (sport science students)</li>
-<li><strong>Data Collection:</strong> Online and on-site assessments</li>
-<li><strong>Variables:</strong> 800+ variables across 25 surveys</li>
+<li><strong>Overview</strong>: how the data were collected, which test phases are included, and a table of the project’s datasets. The table shows what one row is, the key (the variables that together identify one row), and the number of rows and variables.</li>
+<li><strong>Dataset names</strong> and <strong>Variable names</strong>: the codes used only in this project.</li>
+<li><strong>One section per dataset</strong>: every variable with its label, details, units, response options, descriptive statistics, and distribution. <!-- TODO: check against the output of render_survey() --></li>
 </ul>
-<hr>
-<p><strong>Questions?</strong> Contact: maik.bieleke@uni-konstanz.de</p>
-
-
+<p>Use the search in the navigation bar to find a variable by its name or label.</p>
 </section>
+<section id="data-access" class="level2">
+<h2 class="anchored" data-anchor-id="data-access">Data access</h2>
+<!-- TODO -->
+
+
 </section>
 
 </main> <!-- /main -->
